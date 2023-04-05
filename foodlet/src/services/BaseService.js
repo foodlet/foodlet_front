@@ -1,0 +1,32 @@
+import axios from "axios";
+import { getAccessToken, logout } from "../stores/AccessTokenStore";
+
+const INVALID_STATUS_CODES = [401]
+
+export const createHttp = (useAccessToken = false) => {
+  const http = axios.create({baseURL: 'http://localhost:3000'})
+
+  http.interceptors.request.use(
+    (config) => {
+      if(useAccessToken && getAccessToken()) {
+        config.headers.Authorization = `Bearer ${getAccessToken()}`
+      }
+      return config
+    },
+    err => Promise.reject(err)
+  )
+
+  http.interceptors.response.use(
+    (response) => response.data,
+    (err) => {
+      if(err?.response?.status && INVALID_STATUS_CODES.includes(err.response.status)) {
+        if(getAccessToken()) {
+          logout()
+        }
+      }
+      return Promise.reject(err)
+    }
+  )
+
+  return http
+}
