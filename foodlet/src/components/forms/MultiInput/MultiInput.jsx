@@ -55,8 +55,8 @@ const MultiInput = ({setFunction, values, firstInput, secondInput, thirdInput = 
       } */}
       <button className="btn btn-info" onClick={() => {
         setFunction({
-          firstInput: currentFirstInputValue,
-          secondInput: currentSecondInputValue
+          [firstInput]: currentFirstInputValue,
+          [secondInput]: currentSecondInputValue
         })
         setCurrentFirstInputValue('')
         setCurrentSecondInputValue('')

@@ -23,6 +23,7 @@ const INITIAL_VALUES = {
 const CreateRecipe = (props) => {
   const { edit, editValues } = props;
   const navigate = useNavigate()
+  console.log(editValues)
 
   const {
     values, errors, touched, handleChange, handleBlur, isSubmitting, handleSubmit, setSubmitting, setFieldError, setFieldValue
@@ -31,10 +32,6 @@ const CreateRecipe = (props) => {
     validateOnChange: false,
     validationSchema: createRecipesSchema,
     onSubmit: values => {
-      console.log('entro')
-      values.ingredients = ingredients
-      values.steps = steps
-
       const formData = new FormData()
 
       formData.append('name', values.name)
@@ -43,22 +40,38 @@ const CreateRecipe = (props) => {
       formData.append('skillLevel', values.skillLevel)
       formData.append('image', values.image)
       // formData.append('ingredients', ingredients)
-      formData.append('ingredients', values.ingredients)
+      formData.append('ingredients', JSON.stringify(ingredients.map(ingredient => {
+        return {
+          name: ingredient.firstInput,
+          amount: ingredient.secondInput,
+          measuringUnit: 'g'
+        }
+      })))
       formData.append('oven', values.oven)
       formData.append('fridge', values.fridge)
       // formData.append('steps', steps)
-      formData.append('steps', values.steps)
+      formData.append('steps', JSON.stringify(steps.map(step => {
+        return {
+          heading: step.firstInput,
+          text: step.secondInput
+        }
+      })))
 
       // createRecipe(formData)
+      console.log(JSON.parse(formData.get('steps')))
 
       if(edit) {
-        editRecipe(formData)
+        editRecipe({formData})
           .then(recipe => {
             navigate(`/recipes/me/${values.id}`)
           })
           .catch(err => console.log(err))
       } else {
         createRecipe(formData)
+          .then(recipe => {
+            navigate('/users/me')
+          })
+          .catch(err => console.log(err))
       }
     }
   })
@@ -111,7 +124,7 @@ const CreateRecipe = (props) => {
         </FormControl>
 
         <FormControl text='Skill level' error={touched.skillLevel && errors.skillLevel} htmlFor='skillLevel'>
-          <select id='skillLevel' name='skillLevel'>
+          <select id='skillLevel' name='skillLevel' value={values.skillLevel} onChange={handleChange}>
             <option value='beginner'>Beginner</option>
             <option value='intermediate'>Intermediate</option>
             <option value='expert'>Expert</option>
@@ -135,14 +148,14 @@ const CreateRecipe = (props) => {
         </FormControl>
 
         <FormControl text='Oven' error={touched.oven && errors.oven} htmlFor='oven'>
-          <select id='oven' name='oven'>
+          <select id='oven' name='oven' value={values.oven} onChange={handleChange}>
             <option value={true}>Yes</option>
             <option value={false}>No</option>
           </select>
         </FormControl>
         
         <FormControl text='Fridge' error={touched.fridge && errors.fridge} htmlFor='fridge'>
-          <select id='fridge' name='fridge'>
+          <select id='fridge' name='fridge' value={values.fridge} onChange={handleChange}>
             <option value={true}>Yes</option>
             <option value={false}>No</option>
           </select>
@@ -152,7 +165,7 @@ const CreateRecipe = (props) => {
           <MultiInput setFunction={addStep} values={steps} firstInput='stepHeading' secondInput='stepText'/>
         </FormControl>
 
-        <button className="btn btn-success" type="submit" disabled={isSubmitting}>
+        <button className="btn btn-success" type="submit">
           Submit
         </button>
       </form>

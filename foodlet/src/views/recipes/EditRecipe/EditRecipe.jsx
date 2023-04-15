@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getRecipesById } from '../../../services/RecipeService';
+import { getMyRecipesById } from '../../../services/RecipeService';
 import CreateRecipe from '../CreateRecipe/CreateRecipe';
 import { useParams } from 'react-router-dom';
 
@@ -9,8 +9,11 @@ const EditRecipe = () => {
   const [recipe, setRecipe] = useState(null)
 
   useEffect(() => {
-    getRecipesById(id)
-      .then(recipe => setRecipe(recipe))
+    getMyRecipesById(id)
+      .then(recipe => {
+        console.log('recipe', recipe)
+        setRecipe(recipe)
+      })
       .catch(err => console.log(err))
   }, [])
 
