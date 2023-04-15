@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import FormControl from '../../../components/forms/FormControl/FormControl';
 import { getRecipes } from '../../../services/RecipeService';
 import { getRecipesSchema } from '../../../schemas/getRecipes.schema';
 import { useFormik } from 'formik';
 import Input from '../../../components/forms/Input/Input';
+import RecipesContext from '../../../contexts/RecipesContext';
+import { useNavigate } from 'react-router-dom';
+// import { setCurrentRecipes } from '../../../stores/CurrentRecipesStore';
 
 const INITIAL_VALUES = {
   mainIngredient: ''
 }
 
 const GetRecipes = () => {
+  const navigate = useNavigate()
+
+  const { setCurrentRecipes } = useContext(RecipesContext)
+
   const {
     values, errors, touched, handleChange, handleBlur, isSubmitting, handleSubmit, setSubmitting, setFieldError
   } = useFormik({
@@ -19,7 +26,10 @@ const GetRecipes = () => {
     onSubmit: values => {
       console.log(values)
       getRecipes(values.mainIngredient)
-        .then(response => console.log(response))
+        .then(response => {
+          setCurrentRecipes(response)
+          navigate('/list-recipes')
+        })
         .catch(err => console.log(err))
     }
   })

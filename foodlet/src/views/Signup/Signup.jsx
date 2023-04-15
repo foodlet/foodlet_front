@@ -12,7 +12,6 @@ const INITIAL_VALUES = {
   username: '',
   email: '',
   password: '',
-  profilePic: '',
   foodAlergies: '',
   vegan: false,
   vegetarian: false

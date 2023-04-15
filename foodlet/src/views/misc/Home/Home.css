@@ -1,0 +1,26 @@
+.Home img {
+  max-width: 100vw;
+  height: 100vh;
+  /* overflow: hidden; */
+  object-fit: cover;
+  position: fixed;
+}
+
+.Home div {
+  position: relative;
+  top: 70%;
+}
+
+.Home .home-signup {
+  color: #44BBA4;
+}
+
+
+
+.Home .home-start-browsing {
+  background-color: rgb(44, 136, 44);
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
