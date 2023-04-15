@@ -61,9 +61,10 @@ const CreateRecipe = (props) => {
       console.log(JSON.parse(formData.get('steps')))
 
       if(edit) {
-        editRecipe({formData})
+        editRecipe(editValues._id, formData)
           .then(recipe => {
-            navigate(`/recipes/me/${values.id}`)
+            console.log('recipe ', recipe)
+            navigate(`/recipes/${recipe._id}`)
           })
           .catch(err => console.log(err))
       } else {

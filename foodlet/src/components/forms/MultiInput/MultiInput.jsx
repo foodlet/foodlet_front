@@ -30,7 +30,7 @@ const MultiInput = ({setFunction, values, firstInput, secondInput, thirdInput = 
   return (
     <div>
       {values.map(value => {
-        return <p key={value[firstInput]}>{firstInput==='ingredientName' ? `${value.secondInput}g of ${value.firstInput}` : value.firstInput}</p>
+        return <p key={value[firstInput]}>{firstInput==='ingredientName' ? `${value[secondInput]}g of ${value[firstInput]}` : value[firstInput]}</p>
       })}
       <Input 
         name={firstInput}

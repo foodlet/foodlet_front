@@ -9,6 +9,7 @@ import ListRecipes from './views/recipes/ListRecipes/ListRecipes'
 import GetRecipeDetail from './views/recipes/GetRecipeDetail/GetRecipeDetail'
 import CreateRecipe from './views/recipes/CreateRecipe/CreateRecipe'
 import EditRecipe from './views/recipes/EditRecipe/EditRecipe'
+import CreateReview from './views/reviews/CreateReview/CreateReview'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path='recipes/:id' element={<GetRecipeDetail />}/>
         <Route path='create-recipe' element={<CreateRecipe />}/>
         <Route path='edit-recipe/:id' element={<EditRecipe />}/>
+        <Route path='create-review/:id' element={<CreateReview />}/>
       </Routes>
     </div>
   )

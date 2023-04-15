@@ -17,3 +17,7 @@ export const deleteDbSave = (id) => {
 export const deleteExternalSave = (id) => {
   return authenticatedHttp.delete(`/save/external/${id}`)
 }
+
+export const getMySaves = () => {
+  return authenticatedHttp.get('/save/me')
+}

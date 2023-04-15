@@ -45,4 +45,4 @@ export const getRecipesById = id => unautheticatedHttp.get(`/api/${id}`)
 
 export const deleteRecipe = id => authenticatedHttp.delete(`/recipes/${id}`)
 
-export const editRecipe = id => authenticatedHttp.post(`/recipes/${id}`)
+export const editRecipe = (id, recipe) => authenticatedHttp.patch(`/recipes/${id}`, recipe)

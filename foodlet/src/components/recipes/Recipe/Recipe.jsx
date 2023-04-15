@@ -9,9 +9,10 @@ const Recipe = ({ name, description, ingredients, time, img='', id, mine=false }
  
   const handleClick = useCallback(() => {
     setSaved(prevState => !prevState)
-  }, []);
+  }, [])
 
   const handleDelete = id => {
+    console.log(id)
     deleteRecipe(id)
   }
 
@@ -64,10 +65,14 @@ const Recipe = ({ name, description, ingredients, time, img='', id, mine=false }
           <Link to={`/recipes/${id}`}>
             <p className='btn btn-success'>See more</p>
           </Link>
-          {!mine && <button className={saved ? 'btn btn-info' : 'btn btn-primary'} onClick={handleClick}>Save</button>}
+          {!mine && <div>
+            <button className={saved ? 'btn btn-info' : 'btn btn-primary'} onClick={handleClick}>Save</button>
+            <Link className='btn btn-warning' to={`/create-review/${id}`}>Review</Link>
+          </div>
+          }
           {mine && <div>
-            <button className='btn btn-warning' onClick={handleEdit}>Edit</button>
-            <button className='btn btn-danger' onClick={handleDelete}>Delete</button>  
+            <button className='btn btn-warning' onClick={() => handleEdit()}>Edit</button>
+            <button className='btn btn-danger' onClick={() => handleDelete(id)}>Delete</button>  
           </div>}
         </div>
       </div>

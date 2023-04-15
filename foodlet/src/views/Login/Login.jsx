@@ -61,6 +61,7 @@ const Login = () => {
             value={values.password}
             error={touched.password && errors.password}
             placeholder='Enter your password ...'
+            type="password"
           />
         </FormControl>
 
