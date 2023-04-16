@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import RecipesContext from '../../../contexts/RecipesContext';
 import { useParams } from 'react-router-dom';
 import { getMyRecipesById, getRecipesById } from '../../../services/RecipeService';
+import { getReviewsByRecipe } from '../../../services/ReviewService';
+import Review from '../../../components/Review/Review';
 
 const GetRecipeDetail = () => {
   const { currentRecipes } = useContext(RecipesContext)
@@ -10,13 +12,18 @@ const GetRecipeDetail = () => {
   const [recipe, setRecipe] = useState(null)
   const [typeOfRecipe, setTypeOfRecipe] = useState(null)
 
+  const [reviews, setReviews] = useState([])
+  const [reviewsLoaded, setReviewsLoaded] = useState(false)
+
   useEffect(() => {
     if(currentRecipes) {
       getRecipesById(id)
       .then(response => {
         setRecipe(response[0])
         setTypeOfRecipe('api')
-        console.log(response)
+        getReviewsByRecipe(id)
+          .then(reviews => setReviews(reviews))
+          .catch(err => console.log(err))
       })
       .catch(err => console.log(err))
     } else{
@@ -24,7 +31,9 @@ const GetRecipeDetail = () => {
         .then(response => {
           setRecipe(response)
           setTypeOfRecipe('db')
-          console.log(response.ingredients)
+          getReviewsByRecipe(id)
+            .then(reviews => setReviews(reviews))
+            .catch(err => console.log(err))
         })
         .catch(err => console.log(err))
     }
@@ -68,6 +77,13 @@ const GetRecipeDetail = () => {
               })
             }
           </ol>
+          {reviews && <div>
+            <h5>Reviews:</h5>
+            {reviews.map(review => {
+              return <Review user={review.user} score={review.score} text={review.text} image={review.image} />
+            })}
+          </div>  
+          }
         </div>
       }
     </div>
