@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import RecipesContext from '../../../contexts/RecipesContext';
 import { useParams } from 'react-router-dom';
-import { getMyRecipesById, getRecipesById } from '../../../services/RecipeService';
+import { getMyRecipesById, getExternalRecipesById } from '../../../services/RecipeService';
 import { getReviewsByRecipe } from '../../../services/ReviewService';
 import Review from '../../../components/Review/Review';
 
@@ -17,7 +17,7 @@ const GetRecipeDetail = () => {
 
   useEffect(() => {
     if(currentRecipes) {
-      getRecipesById(id)
+      getExternalRecipesById(id)
       .then(response => {
         setRecipe(response[0])
         setTypeOfRecipe('api')

@@ -21,36 +21,37 @@ const Signup = () => {
   const navigate = useNavigate()
 
   const {
-    values, errors, touched, handleChange, handleBlur, isSubmitting, handleSubmit, setSubmitting, setFieldError
+    values, errors, touched, handleChange, handleBlur, isSubmitting, handleSubmit, setSubmitting, setFieldError, setFieldValue
   } = useFormik({
     initialValues: INITIAL_VALUES,
     validateOnChange: false,
     validationSchema: signupSchema,
     onSubmit: values => {
-      signupService({
-        firstName: values.firstName,
-        lastName: values.lastName,
-        username: values.username, 
-        email: values.email, 
-        password: values.password,
-        profilePic: values.profilePic,
-        foodAlergies: values.foodAlergies,
-        vegan: values.vegan,
-        vegetarian: values.vegetarian 
-      })
+      // signupService({
+      //   firstName: values.firstName,
+      //   lastName: values.lastName,
+      //   username: values.username, 
+      //   email: values.email, 
+      //   password: values.password,
+      //   profilePic: values.profilePic,
+      //   foodAlergies: values.foodAlergies,
+      //   vegan: values.vegan,
+      //   vegetarian: values.vegetarian 
+      // })
 
-      // const formData = new FormData()
+      const formData = new FormData()
 
-      // formData.append('firstName', values.firstName)
-      // formData.append('lastName', values.lastName)
-      // formData.append('username', values.username)
-      // formData.append('email', values.email)
-      // formData.append('password', values.password)
-      // formData.append('profilePic', values.profilePic)
-      // formData.append('foodAlergies', values.foodAlergies)
-      // formData.append('vegan', values.vegan)
-      // formData.append('vegetarian', values.vegetarian)
+      formData.append('firstName', values.firstName)
+      formData.append('lastName', values.lastName)
+      formData.append('username', values.username)
+      formData.append('email', values.email)
+      formData.append('password', values.password)
+      formData.append('profilePic', values.profilePic)
+      formData.append('foodAlergies', values.foodAlergies)
+      formData.append('vegan', values.vegan)
+      formData.append('vegetarian', values.vegetarian)
 
+      signupService(formData)
         .then(response => {
           navigate('/login')
         })
@@ -131,6 +132,7 @@ const Signup = () => {
             value={values.password}
             error={touched.password && errors.password}
             placeholder='Enter your password ...'
+            type='password'
           />
         </FormControl>
 
@@ -159,20 +161,20 @@ const Signup = () => {
         </FormControl>
 
         <FormControl text='Vegan' error={touched.vegan && errors.vegan} htmlFor='vegan'>
-          <select name='vegan' id='vegan'>
+          <select name='vegan' id='vegan' value={values.vegan} onChange={handleChange}>
             <option value={true}>Yes</option>
             <option value={false}>No</option>
           </select>
         </FormControl>
 
         <FormControl text='Vegetarian' error={touched.vegetarian && errors.vegetarian} htmlFor='vegetarian'>
-          <select name='vegetarian' id='vegetarian'>
+          <select name='vegetarian' id='vegetarian' value={values.vegetarian} onChange={handleChange}>
             <option value={true}>Yes</option>
             <option value={false}t>No</option>
           </select>
         </FormControl>
 
-        <button className="btn btn-primary" type="submit" disabled={isSubmitting}>
+        <button className="btn btn-primary" type="submit">
           Submit
         </button>
       </form>

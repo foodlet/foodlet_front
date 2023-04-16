@@ -41,7 +41,7 @@ export const getMyRecipes = () => authenticatedHttp.get('/recipes/me')
 
 export const getMyRecipesById = id => authenticatedHttp.get(`/recipes/me/${id}`)
 
-export const getRecipesById = id => unautheticatedHttp.get(`/api/${id}`)
+export const getExternalRecipesById = id => unautheticatedHttp.get(`/api/${id}`)
 
 export const deleteRecipe = id => authenticatedHttp.delete(`/recipes/${id}`)
 

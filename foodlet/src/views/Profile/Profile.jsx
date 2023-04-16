@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import ProfilePic from '../../components/ProfilePic/ProfilePic';
-import { getMyRecipes } from '../../services/RecipeService';
+import { getExternalRecipesById, getMyRecipes } from '../../services/RecipeService';
 import Recipe from '../../components/recipes/Recipe/Recipe';
 import { getMySaves } from '../../services/SaveService';
 
@@ -11,6 +11,7 @@ const Profile = () => {
   const [myRecipes, setMyRecipes] = useState([])
   const [mySaves, setMySaves] = useState([])
   const [mySavesLoaded, setMySavesLoaded] = useState(false)
+  const [myPopulatedSavesLoaded, setMyPopulatedSavesLoaded] = useState(false)
 
   useEffect(() => {
     getMyRecipes()
@@ -19,9 +20,39 @@ const Profile = () => {
         setMyRecipesLoaded(true)
         getMySaves()
           .then(saves => {
-            console.log(saves)
-            setMySaves(saves)
-            setMySavesLoaded(true)
+            // setMySaves(saves)
+            // setMySavesLoaded(true)
+            let myPopulatedSaves = []
+            saves.forEach((save, i) => {
+              if(save.externalRecipe) {
+                getExternalRecipesById(save.externalRecipe)
+                  .then(externalRecipe => {
+                    // mySaves[i].externalRecipe = externalRecipe[0]
+                    console.log({...saves[i], externalRecipe: externalRecipe[0]})
+                    myPopulatedSaves.push({...saves[i], externalRecipe: externalRecipe[0]})
+                    console.log(myPopulatedSaves)
+                    // myPopulatedSaves.length === saves.length ? myPopulatedSavesLoaded = true : null
+                    if(myPopulatedSaves.length === saves.length) {
+                      setMyPopulatedSavesLoaded(true)
+                      console.log(myPopulatedSavesLoaded)
+                    }
+                  })
+                  .catch(err => console.log(err))
+              } else {
+                myPopulatedSaves.push(save)
+                if(myPopulatedSaves.length === saves.length) {
+                  setMyPopulatedSavesLoaded(true)
+                }
+              }
+            })
+            // myPopulatedSaves.length ? setMySaves(myPopulatedSaves) : setMySaves(saves)
+            // myPopulatedSavesLoaded ? setMySaves(myPopulatedSaves) : null
+            console.log(mySavesLoaded)
+            if(myPopulatedSavesLoaded) {
+              console.log('slay', myPopulatedSaves)
+              setMySaves(myPopulatedSaves)
+              setMySavesLoaded(true)
+            }
           })
           .catch(err => console.log(err))
       })
@@ -45,7 +76,7 @@ const Profile = () => {
               })}
             </div>
           }
-          {mySavesLoaded &&
+          {myPopulatedSavesLoaded &&
             <div>
               <h4>My saves</h4>
               {mySaves.map(save => {
