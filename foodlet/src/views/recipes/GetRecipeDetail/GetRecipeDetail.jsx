@@ -16,7 +16,7 @@ const GetRecipeDetail = () => {
   const [reviewsLoaded, setReviewsLoaded] = useState(false)
 
   useEffect(() => {
-    if(currentRecipes) {
+    if(id < 10000) {
       getExternalRecipesById(id)
       .then(response => {
         setRecipe(response[0])

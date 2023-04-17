@@ -1,9 +1,18 @@
+.Navbar {
+  position: fixed;
+  /* bottom: 0; */
+  width: 95%;
+  background-color: white;
+  padding: 15px;
+  height: 60px;
+  z-index: 1;
+}
+
 .Navbar, .Navbar div {
   display: flex;
   gap: 5px;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  margin: 5px;
 }
 
 .Navbar img {
@@ -16,4 +25,8 @@
   text-decoration: none;
   color: black;
   font-weight: 450;
+}
+
+.clicked-link {
+  color: "#0a751c";
 }

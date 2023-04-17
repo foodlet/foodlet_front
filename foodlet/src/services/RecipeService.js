@@ -46,3 +46,7 @@ export const getExternalRecipesById = id => unautheticatedHttp.get(`/api/${id}`)
 export const deleteRecipe = id => authenticatedHttp.delete(`/recipes/${id}`)
 
 export const editRecipe = (id, recipe) => authenticatedHttp.patch(`/recipes/${id}`, recipe)
+
+export const getFeedRecipes = () => authenticatedHttp.get('/recipes/not-me')
+
+export const getUnauthenticatedFeedRecipes = () => unautheticatedHttp.get('/recipes')

@@ -42,18 +42,19 @@ const CreateRecipe = (props) => {
       // formData.append('ingredients', ingredients)
       formData.append('ingredients', JSON.stringify(ingredients.map(ingredient => {
         return {
-          name: ingredient.firstInput,
-          amount: ingredient.secondInput,
+          name: ingredient.ingredientName,
+          amount: ingredient.ingredientAmount,
           measuringUnit: 'g'
         }
       })))
       formData.append('oven', values.oven)
       formData.append('fridge', values.fridge)
       // formData.append('steps', steps)
+      console.log(steps)
       formData.append('steps', JSON.stringify(steps.map(step => {
         return {
-          heading: step.firstInput,
-          text: step.secondInput
+          heading: step.stepHeading,
+          text: step.stepText
         }
       })))
 
@@ -80,6 +81,7 @@ const CreateRecipe = (props) => {
   const [ ingredients, setIngredients ] = useState([])
   const [ steps, setSteps ] = useState([])
   const addIngredient = (ingredient) => {
+    console.log(ingredient)
     setIngredients([ ...ingredients, ingredient])
   }
   const addStep = step => setSteps([...steps, step])

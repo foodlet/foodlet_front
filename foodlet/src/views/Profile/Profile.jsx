@@ -4,6 +4,7 @@ import ProfilePic from '../../components/ProfilePic/ProfilePic';
 import { getExternalRecipesById, getMyRecipes } from '../../services/RecipeService';
 import Recipe from '../../components/recipes/Recipe/Recipe';
 import { getMySaves } from '../../services/SaveService';
+import Save from '../../components/Save/Save';
 
 const Profile = () => {
   const { currentUser, isAuthLoaded } = useContext(AuthContext)
@@ -22,37 +23,59 @@ const Profile = () => {
           .then(saves => {
             // setMySaves(saves)
             // setMySavesLoaded(true)
-            let myPopulatedSaves = []
-            saves.forEach((save, i) => {
+            // console.log('saves ', saves.length)
+            // let myPopulatedSaves = []
+            // saves.forEach((save, i) => {
+            //   if(save.externalRecipe) {
+            //     getExternalRecipesById(save.externalRecipe)
+            //       .then(externalRecipe => {
+            //         // mySaves[i].externalRecipe = externalRecipe[0]
+            //         console.log({...saves[i], externalRecipe: externalRecipe[0]})
+            //         myPopulatedSaves.push({...saves[i], externalRecipe: externalRecipe[0]})
+            //         console.log(myPopulatedSaves)
+            //         // myPopulatedSaves.length === saves.length ? myPopulatedSavesLoaded = true : null
+            //         if(myPopulatedSaves.length === saves.length) {
+            //           setMyPopulatedSavesLoaded(true)
+            //           console.log(myPopulatedSavesLoaded)
+            //         }
+            //       })
+            //       .catch(err => console.log(err))
+            //   } else {
+            //     myPopulatedSaves.push(save)
+            //     if(myPopulatedSaves.length === saves.length) {
+            //       setMyPopulatedSavesLoaded(true)
+            //     }
+            //   }
+            // })
+            // // myPopulatedSaves.length ? setMySaves(myPopulatedSaves) : setMySaves(saves)
+            // // myPopulatedSavesLoaded ? setMySaves(myPopulatedSaves) : null
+            // console.log(myPopulatedSavesLoaded)
+            // if(myPopulatedSavesLoaded) {
+            //   console.log('slay', myPopulatedSaves)
+            //   setMySaves(myPopulatedSaves)
+            //   setMySavesLoaded(true)
+            // }
+            let promiseArr = []
+            let myPopulatedArr = []
+            saves.forEach((save) => {
               if(save.externalRecipe) {
-                getExternalRecipesById(save.externalRecipe)
-                  .then(externalRecipe => {
-                    // mySaves[i].externalRecipe = externalRecipe[0]
-                    console.log({...saves[i], externalRecipe: externalRecipe[0]})
-                    myPopulatedSaves.push({...saves[i], externalRecipe: externalRecipe[0]})
-                    console.log(myPopulatedSaves)
-                    // myPopulatedSaves.length === saves.length ? myPopulatedSavesLoaded = true : null
-                    if(myPopulatedSaves.length === saves.length) {
-                      setMyPopulatedSavesLoaded(true)
-                      console.log(myPopulatedSavesLoaded)
-                    }
-                  })
-                  .catch(err => console.log(err))
+                promiseArr.push(getExternalRecipesById(save.externalRecipe))
               } else {
-                myPopulatedSaves.push(save)
-                if(myPopulatedSaves.length === saves.length) {
-                  setMyPopulatedSavesLoaded(true)
-                }
+                // setMySaves([...mySaves, value[0]])
+                myPopulatedArr.push(save)
               }
             })
-            // myPopulatedSaves.length ? setMySaves(myPopulatedSaves) : setMySaves(saves)
-            // myPopulatedSavesLoaded ? setMySaves(myPopulatedSaves) : null
-            console.log(mySavesLoaded)
-            if(myPopulatedSavesLoaded) {
-              console.log('slay', myPopulatedSaves)
-              setMySaves(myPopulatedSaves)
-              setMySavesLoaded(true)
-            }
+            Promise.all(promiseArr)
+              .then(values => {
+                values.map((value, i) => {
+                  setMySaves([...mySaves, value[0]])
+                  console.log(value[0])
+                  // if(values[i] === values[values.length - 1]){
+                  //   setMySavesLoaded(true)
+                  // }
+                })
+                setMySavesLoaded(true)
+              })
           })
           .catch(err => console.log(err))
       })
@@ -76,11 +99,20 @@ const Profile = () => {
               })}
             </div>
           }
-          {myPopulatedSavesLoaded &&
+          {mySavesLoaded &&
             <div>
               <h4>My saves</h4>
               {mySaves.map(save => {
-                console.log(save)
+                return <div>
+                  {save.name && <div>
+                      <Save name={save.name} description={save.description} id={save.id} />
+                    </div>
+                  }
+                  {/* {save.recipe && <div>
+                      <Save name={save.recipe.name} description={save.recipe.description} id={save.recipe.id} />
+                    </div>
+                  } */}
+                </div>
               })}
             </div>
           }
