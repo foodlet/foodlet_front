@@ -10,3 +10,7 @@ export const createReview = (id, review) => {
 export const getReviewsByRecipe = (id) => {
   return unautheticatedHttp.get(`/review/${id}`)
 }
+
+export const getMyReviews = () => {
+  return authenticatedHttp.get('/review/me')
+}

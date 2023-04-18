@@ -26,9 +26,10 @@ const Navbar = () => {
           <Link to='/signup'>Signup</Link>
         </div>
       }
-      <Link to='/feed'><i class="fa-solid fa-house fa-lg"></i></Link>
+      <Link to='/feed'><i className="fa-solid fa-house fa-lg"></i></Link>
       <Link to='/get-recipes'><i className="fa-solid fa-magnifying-glass fa-lg"></i></Link>
       <Link to='/create-recipe'><i className="fa-regular fa-square-plus fa-lg" onClick={handleClick}></i></Link>
+      <Link to='/review-diary'><i className="fa-solid fa-book fa-lg"></i></Link>
       <Link to='/profile'>
         {currentUser ? <ProfilePic /> :
           <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYv0uOlC1qkaEARvqS2VK4-TDQPnXmsz7I5w&usqp=CAU'/>

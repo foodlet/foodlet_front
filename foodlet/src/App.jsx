@@ -11,6 +11,7 @@ import CreateRecipe from './views/recipes/CreateRecipe/CreateRecipe'
 import EditRecipe from './views/recipes/EditRecipe/EditRecipe'
 import CreateReview from './views/reviews/CreateReview/CreateReview'
 import Feed from './views/recipes/Feed/Feed'
+import ReviewDiary from './views/reviews/ReviewDiary/ReviewDiary'; {/* it's ok, idk why it's underlined lolz */}
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path='edit-recipe/:id' element={<EditRecipe />}/>
         <Route path='create-review/:id' element={<CreateReview />}/>
         <Route path='feed' element={<Feed />}/>
+        <Route path='review-diary' element={<ReviewDiary />}/>
       </Routes>
     </div>
   )
