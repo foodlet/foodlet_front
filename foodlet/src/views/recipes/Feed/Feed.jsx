@@ -40,12 +40,14 @@ const Feed = () => {
         })} 
       </div>}
       {!recipesLoaded &&
-        <PuffLoader
-          color='#006A4C'
-          size={50}
-          aria-label="Loading Spinner"
-          data-testid="loader"
-        />
+        <div className='loader-div'>
+          <PuffLoader
+            color='#006A4C'
+            size={50}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        </div>
       }
     </div>
   );

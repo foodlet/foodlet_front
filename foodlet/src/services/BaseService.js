@@ -4,7 +4,7 @@ import { getAccessToken, logout } from "../stores/AccessTokenStore";
 const INVALID_STATUS_CODES = [401]
 
 export const createHttp = (useAccessToken = false) => {
-  const http = axios.create({baseURL: 'http://localhost:3000'})
+  const http = axios.create({baseURL: import.meta.env.VITE_API_URL})
 
   http.interceptors.request.use(
     (config) => {
