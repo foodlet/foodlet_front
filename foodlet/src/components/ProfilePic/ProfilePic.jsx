@@ -4,7 +4,7 @@ import AuthContext from '../../contexts/AuthContext';
 const ProfilePic = () => {
   const { currentUser, isAuthLoaded } = useContext(AuthContext)
   return (
-    <div>
+    <div className='ProfilePic'>
       {isAuthLoaded && <img src={currentUser.profilePic}/>}
     </div>
   );

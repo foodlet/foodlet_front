@@ -1,0 +1,52 @@
+h3 {
+  font-size: 34px;
+  margin: 10px 10px 30px 10px;
+}
+
+.time-recipe-detail {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+}
+
+.recipe-tag {
+  background-color: #2DC653;
+  border-radius: 12px;
+  width: fit-content;
+  padding: 3px 8px;
+  color: white;
+}
+
+.RecipeDetail > ul > li > p {
+  margin-top: 0;
+}
+
+h5 {
+  margin-bottom: 7px !important;
+}
+
+.RecipeDetail > div > ul {
+  list-style: none;
+}
+
+.ingredient-tag {
+  background-color: rgb(210, 209, 209);
+  width: fit-content;
+  padding: 5px 13px;
+  border-radius: 5px;
+}
+
+.detail-container {
+  margin-top: 40px !important;
+}
+
+ol > li > p {
+  margin-bottom: 0;
+}
+
+.step-tag {
+  width: 85vw;
+  background-color: rgb(210, 209, 209);
+  padding: 5px 13px;
+  border-radius: 5px;
+}

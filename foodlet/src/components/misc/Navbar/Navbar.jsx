@@ -8,14 +8,14 @@ import './Navbar.css'
 const Navbar = () => {
   const {currentUser} = useContext(AuthContext)
 
-  const handleClick = (e) => {
-    console.log(e.target.classList)
-    if(e.target.classList.includes('clicked-link')) {
-      e.target.classList.remove('clicked-link')
-    } else {
-      e.target.classList.add('clicked-link')
-    }
-  }
+  // const handleClick = (e) => {
+  //   console.log(e.target.classList)
+  //   if(e.target.classList.includes('clicked-link')) {
+  //     e.target.classList.remove('clicked-link')
+  //   } else {
+  //     e.target.classList.add('clicked-link')
+  //   }
+  // }
 
   return (
     <div className='Navbar sticky-bottom'>
@@ -28,7 +28,7 @@ const Navbar = () => {
       }
       <Link to='/feed'><i className="fa-solid fa-house fa-lg"></i></Link>
       <Link to='/get-recipes'><i className="fa-solid fa-magnifying-glass fa-lg"></i></Link>
-      <Link to='/create-recipe'><i className="fa-regular fa-square-plus fa-lg" onClick={handleClick}></i></Link>
+      <Link to='/create-recipe'><i className="fa-regular fa-square-plus fa-lg"></i></Link>
       <Link to='/review-diary'><i className="fa-solid fa-book fa-lg"></i></Link>
       <Link to='/profile'>
         {currentUser ? <ProfilePic /> :

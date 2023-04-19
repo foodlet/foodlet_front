@@ -37,6 +37,7 @@ const GetRecipes = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
+        <h3>Get 20 recipes with the ingredient of your choice!</h3>
         <FormControl text='Main ingredient' error={touched.mainIngredient && errors.mainIngredient} htmlFor='mainIngredient'>
           <Input 
             id='mainIngredient'

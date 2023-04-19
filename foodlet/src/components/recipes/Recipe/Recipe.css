@@ -1,0 +1,19 @@
+.Recipe > div > div > div {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+} 
+
+.Recipe > div > div > div > div {
+  display: flex;
+  gap: 5px;
+}
+
+.Recipe > div {
+  padding: 15px;
+  width: 95vw;
+}
+
+.Recipe > div > div {
+  padding: 0 10px;
+}

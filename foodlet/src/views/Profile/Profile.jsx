@@ -5,6 +5,7 @@ import { getExternalRecipesById, getMyRecipes } from '../../services/RecipeServi
 import Recipe from '../../components/recipes/Recipe/Recipe';
 import { getMySaves } from '../../services/SaveService';
 import Save from '../../components/Save/Save';
+import './Profile.css'
 
 const Profile = () => {
   const { currentUser, isAuthLoaded } = useContext(AuthContext)
@@ -85,35 +86,41 @@ const Profile = () => {
   return (
     <div>
       {isAuthLoaded && 
-        <div>
-          <ProfilePic />
-          <h3>@{currentUser.username}</h3>
+        <div className='Profile'>
+          <div className='user-info-profile'>
+            <ProfilePic />
+            <h3>@{currentUser.username}</h3>
+          </div>
           {myRecipesLoaded && 
             <div>
-              <h4>My recipes</h4>
-              {myRecipes.map(myRecipe => {
-                return <div>
-                  {console.log(myRecipe._id)}
-                  <Recipe name={myRecipe.name} description={myRecipe.description} id={myRecipe._id} ingredients={myRecipe.ingredients} time={myRecipe.time} key={myRecipe.id} mine={true}/>
-                </div>
-              })}
+              <h4 className='profile-heading'>My recipes</h4>
+              <div className='my-recipes-profile'>
+                {myRecipes.map(myRecipe => {
+                  return <div>
+                    {console.log(myRecipe._id)}
+                    <Recipe name={myRecipe.name} description={myRecipe.description} id={myRecipe._id} ingredients={myRecipe.ingredients} time={myRecipe.time} key={myRecipe.id} mine={true}/>
+                  </div>
+                })}
+              </div>
             </div>
           }
           {mySavesLoaded &&
             <div>
-              <h4>My saves</h4>
-              {mySaves.map(save => {
-                return <div>
-                  {save.name && <div>
-                      <Save name={save.name} description={save.description} id={save.id} />
-                    </div>
-                  }
-                  {/* {save.recipe && <div>
-                      <Save name={save.recipe.name} description={save.recipe.description} id={save.recipe.id} />
-                    </div>
-                  } */}
-                </div>
-              })}
+              <h4 className='profile-heading'>My saves</h4>
+              <div className='my-saves-profile'>
+                {mySaves.map(save => {
+                  return <div>
+                    {save.name && <div>
+                        <Save name={save.name} description={save.description} id={save.id} />
+                      </div>
+                    }
+                    {/* {save.recipe && <div>
+                        <Save name={save.recipe.name} description={save.recipe.description} id={save.recipe.id} />
+                      </div>
+                    } */}
+                  </div>
+                })}
+              </div>
             </div>
           }
         </div>

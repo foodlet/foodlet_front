@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createDbSave, createExternalSave, deleteDbSave, deleteExternalSave } from '../../../services/SaveService';
 import { deleteRecipe } from '../../../services/RecipeService';
+import './Recipe.css';
 
 const Recipe = ({ name, description, ingredients, time, img='', id, mine=false }) => {
   const [saved, setSaved] = useState(false)
@@ -56,24 +57,26 @@ const Recipe = ({ name, description, ingredients, time, img='', id, mine=false }
   }, [saved])
 
   return (
-    <div>
-      <div className="card" style={{width: "18rem"}}>
+    <div className='Recipe'>
+      <div className="card" style={{backgroundColor: 'rgb(246, 245, 245)', border: 'none'}}>
         {img && <img src={img} className="card-img-top" alt={name} />}
         <div className="card-body">
           <h5 className="card-title">{name}</h5>
           <p className="card-text">{description}</p>
-          <Link to={`/recipes/${id}`}>
-            <p className='btn btn-success'>See more</p>
-          </Link>
-          {!mine && <div>
-            <button className={saved ? 'btn btn-info' : 'btn btn-primary'} onClick={handleClick}>Save</button>
-            <Link className='btn btn-warning' to={`/create-review/${id}`}>Review</Link>
+          <div>
+            <Link to={`/recipes/${id}`}>
+              <p className='btn' style={{backgroundColor: '#25A244', color: 'white', padding: '8px 20px'}}>See more</p>
+            </Link>
+            {!mine && <div>
+              <button className={saved ? 'btn btn-info' : 'btn btn-primary'} onClick={handleClick}>Save</button>
+              <Link className='btn btn-warning' to={`/create-review/${id}`}>Review</Link>
+            </div>
+            }
+            {mine && <div>
+              <button className='btn' onClick={() => handleEdit()} style={{backgroundColor: 'rgb(154, 154, 154)'}}><i className="fa-solid fa-pen-to-square"></i></button>
+              <button className='btn' onClick={() => handleDelete(id)} style={{backgroundColor: 'rgb(154, 154, 154)'}}><i className="fa-solid fa-trash"></i></button>  
+            </div>}
           </div>
-          }
-          {mine && <div>
-            <button className='btn btn-warning' onClick={() => handleEdit()}>Edit</button>
-            <button className='btn btn-danger' onClick={() => handleDelete(id)}>Delete</button>  
-          </div>}
         </div>
       </div>
     </div>

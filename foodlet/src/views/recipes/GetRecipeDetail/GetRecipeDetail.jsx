@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { getMyRecipesById, getExternalRecipesById } from '../../../services/RecipeService';
 import { getReviewsByRecipe } from '../../../services/ReviewService';
 import Review from '../../../components/Review/Review';
+import './GetRecipeDetail.css'
 
 const GetRecipeDetail = () => {
   const { currentRecipes } = useContext(RecipesContext)
@@ -42,43 +43,50 @@ const GetRecipeDetail = () => {
   return (
     <div>
       {recipe && 
-        <div>
+        <div className='RecipeDetail'>
           <h3>{recipe.name}</h3>
           <h5>{recipe.description}</h5>
-          <p>Time: {typeOfRecipe === 'db' ? recipe.time : recipe.total_time_minutes} minutes</p>
-          <p>{recipe.oven && 'oven needed'}</p>
-          <p>{recipe.fridge && 'fridge needed'}</p>
-          <h5>Ingredients:</h5>
-          <ul>
-            {typeOfRecipe === 'db' ?
-              recipe.ingredients.map(ingredient => {
-                return <div key={ingredient.name}>
-                  <li>{ingredient.amount}g of {ingredient.name}</li>
-                </div>
-              })
-            :
-              recipe.sections[0].components.map(ingredient => {
-                return <li key={ingredient.raw_text}>{ingredient.raw_text}</li>
-              })
-            }
-          </ul>
-          <h5>Steps:</h5>
-          <ol>
-            {typeOfRecipe === 'db' ? 
-              recipe.steps.map(step => {
-                return <li key={step.heading}>
-                  <p><b>{step.heading}</b></p>
-                  <p>{step.text}</p>
-                </li>
-              })
-            :
-              recipe.instructions.map(step => {
-                return <li key={step.display_text}>{step.display_text}</li>
-              })
-            }
-          </ol>
-          {reviews && <div>
-            <h5>Reviews:</h5>
+          <div className='time-recipe-detail'>
+            <i class="fa-solid fa-clock"></i>
+            <p>{typeOfRecipe === 'db' ? recipe.time : recipe.total_time_minutes} minutes</p>
+          </div>
+          <p>{recipe.oven && <p className='recipe-tag'>oven needed</p>}</p>
+          <p>{recipe.fridge && <p className='recipe-tag'>oven needed</p>}</p>
+          <div className='detail-container'>
+            <h5 className='profile-heading'>Ingredients:</h5>
+            <ul>
+              {typeOfRecipe === 'db' ?
+                recipe.ingredients.map(ingredient => {
+                  return <div key={ingredient.name} className='ingredient-tag'>
+                    <li>{ingredient.amount}g of {ingredient.name}</li>
+                  </div>
+                })
+              :
+                recipe.sections[0].components.map(ingredient => {
+                  return <li key={ingredient.raw_text}>{ingredient.raw_text}</li>
+                })
+              }
+            </ul>
+          </div>
+          <div className='detail-container'>
+            <h5 className='profile-heading'>Steps:</h5>
+            <ol>
+              {typeOfRecipe === 'db' ? 
+                recipe.steps.map(step => {
+                  return <li key={step.heading} className='step-tag'>
+                    <p><b>{step.heading}</b></p>
+                    <p>{step.text}</p>
+                  </li>
+                })
+              :
+                recipe.instructions.map(step => {
+                  return <li key={step.display_text}>{step.display_text}</li>
+                })
+              }
+            </ol>
+          </div>
+          {reviews && <div className='detail-container'>
+            <h5 className='profile-heading'>Reviews:</h5>
             {reviews.map(review => {
               return <Review user={review.user} score={review.score} text={review.text} image={review.image} />
             })}
@@ -86,6 +94,7 @@ const GetRecipeDetail = () => {
           }
         </div>
       }
+      {!recipe && <p>Recipe not found :{'('}</p>}
     </div>
   );
 };
