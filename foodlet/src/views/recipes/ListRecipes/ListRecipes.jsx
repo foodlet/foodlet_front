@@ -7,7 +7,7 @@ const ListRecipes = () => {
   const { currentRecipes } = useContext(RecipesContext)
 
   return (
-    <div className='app-container'>
+    <div className='app-container' style={{display:'flex', gap:'9px', flexWrap:'wrap'}}>
       {currentRecipes && 
         currentRecipes.map(recipe => {
           return <div key={recipe.name}>

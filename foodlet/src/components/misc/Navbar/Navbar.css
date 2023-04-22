@@ -1,7 +1,7 @@
 .Navbar {
   position: fixed;
   /* bottom: 0; */
-  width: 95%;
+  width: 100vw;
   background-color: white;
   padding: 15px;
   height: 60px;
