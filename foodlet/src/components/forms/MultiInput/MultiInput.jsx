@@ -53,7 +53,7 @@ const MultiInput = ({setFunction, values, firstInput, secondInput, thirdInput = 
         />
       : null
       } */}
-      <button className="btn btn-info" onClick={() => {
+      <button className="btn" style={{backgroundColor:'#4AD66D'}} onClick={() => {
         console.log({
           [firstInput]: currentFirstInputValue,
           [secondInput]: currentSecondInputValue

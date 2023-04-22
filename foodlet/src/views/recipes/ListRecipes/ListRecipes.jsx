@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import Recipe from '../../../components/recipes/Recipe/Recipe';
 import RecipesContext from '../../../contexts/RecipesContext';
+import { PuffLoader } from 'react-spinners';
 
 const ListRecipes = () => {
   const { currentRecipes } = useContext(RecipesContext)
 
   return (
-    <div>
+    <div className='app-container'>
       {currentRecipes && 
         currentRecipes.map(recipe => {
           return <div key={recipe.name}>

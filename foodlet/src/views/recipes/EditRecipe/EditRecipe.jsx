@@ -18,7 +18,7 @@ const EditRecipe = () => {
   }, [])
 
   return (
-    <div>
+    <div className='app-container'>
       {recipe &&
         <CreateRecipe edit={true} editValues={recipe}/>
       }

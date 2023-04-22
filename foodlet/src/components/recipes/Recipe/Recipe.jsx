@@ -59,7 +59,7 @@ const Recipe = ({ name, description, ingredients, time, img='', id, mine=false }
   return (
     <div className='Recipe'>
       <div className="card" style={{backgroundColor: 'rgb(246, 245, 245)', border: 'none'}}>
-        {img && <img src={img} className="card-img-top" alt={name} />}
+        {img && <img src={img} className="card-img-top mb-3" alt={name} style={{height:'25vh', objectFit:'cover'}}/>}
         <div className="card-body">
           <h5 className="card-title">{name}</h5>
           <p className="card-text">{description}</p>
@@ -68,8 +68,8 @@ const Recipe = ({ name, description, ingredients, time, img='', id, mine=false }
               <p className='btn' style={{backgroundColor: '#25A244', color: 'white', padding: '8px 20px'}}>See more</p>
             </Link>
             {!mine && <div>
-              <button className={saved ? 'btn btn-info' : 'btn btn-primary'} onClick={handleClick}>Save</button>
-              <Link className='btn btn-warning' to={`/create-review/${id}`}>Review</Link>
+              <button className='btn' onClick={handleClick}><i className={saved ? "fa-solid fa-bookmark" : "fa-regular fa-bookmark"}></i></button>
+              <Link className='btn' to={`/create-review/${id}`}><i class="fa-solid fa-pencil"></i></Link>
             </div>
             }
             {mine && <div>

@@ -37,7 +37,7 @@ const Login = () => {
   })
 
   return(
-    <div>
+    <div className="app-container">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <FormControl text='Email' error={touched.email && errors.email} htmlFor='email'>
@@ -65,7 +65,7 @@ const Login = () => {
           />
         </FormControl>
 
-        <button className="btn btn-primary" type="submit" disabled={isSubmitting}>
+        <button className="btn btn-success" type="submit" disabled={isSubmitting}>
           Submit
         </button>
       </form>

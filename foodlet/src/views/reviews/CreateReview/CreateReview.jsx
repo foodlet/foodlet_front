@@ -38,7 +38,7 @@ const CreateReview = () => {
   })
 
   return (
-    <div>
+    <div className='app-container'>
       <h2>Create review</h2>
       <form onSubmit={handleSubmit} encType='multipart/form-data'>
         <FormControl text='Score' error={touched.score && errors.score} htmlFor='score'>

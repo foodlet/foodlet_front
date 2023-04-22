@@ -33,8 +33,8 @@ const Feed = () => {
   }, [])
 
   return (
-    <div>
-      {recipesLoaded && <div>
+    <div className='app-container'>
+      {recipesLoaded && <div style={{display:'flex', gap:'9px', flexWrap:'wrap'}}>
         {recipes.map(recipe => {
           return <Recipe name={recipe.name} description={recipe.description} img={recipe.image} id={recipe._id}/> 
         })} 

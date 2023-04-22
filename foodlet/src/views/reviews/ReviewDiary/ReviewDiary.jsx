@@ -17,8 +17,9 @@ const ReviewDiary = () => {
   }, [])
 
   return (
-    <div>
-      {reviewsLoaded && <div>
+    <div className='app-container'>
+      <h3>Your review diary</h3>
+      {reviewsLoaded && <div style={{display:'flex', gap:'10px', flexWrap:'wrap'}}>
         {reviews.map(review => {
           // {review.dbRecipe ? recipe = review.dbRecipe : recipe = review.externalRecipe}
           return <div key={review._id}>

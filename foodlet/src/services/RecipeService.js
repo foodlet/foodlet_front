@@ -34,7 +34,7 @@ export const getRecipes = mainIngredient => unautheticatedHttp.get(`/api/${mainI
 // }
 
 export const createRecipe = recipe => {
-  authenticatedHttp.post('/recipes', recipe)
+  return authenticatedHttp.post('/recipes', recipe)
 }
 
 export const getMyRecipes = () => authenticatedHttp.get('/recipes/me')

@@ -72,7 +72,7 @@ const Signup = () => {
 
 
   return (
-    <div>
+    <div className='app-container'>
       <h2>Signup</h2>
       <form onSubmit={handleSubmit} encType='multipart/form-data'>
         <FormControl text='First name' error={touched.firstName && errors.firstName} htmlFor='firstName'>
@@ -174,7 +174,7 @@ const Signup = () => {
           </select>
         </FormControl>
 
-        <button className="btn btn-primary" type="submit">
+        <button className="btn btn-success" type="submit">
           Submit
         </button>
       </form>

@@ -41,7 +41,7 @@ const GetRecipeDetail = () => {
   }, [])
 
   return (
-    <div>
+    <div className='app-container'>
       {recipe && 
         <div className='RecipeDetail'>
           <h3>{recipe.name}</h3>
@@ -57,7 +57,7 @@ const GetRecipeDetail = () => {
             <ul>
               {typeOfRecipe === 'db' ?
                 recipe.ingredients.map(ingredient => {
-                  return <div key={ingredient.name} className='ingredient-tag'>
+                  return <div key={ingredient.name} className='ingredient-tag' style={{margin:'0 0 10px 0'}}>
                     <li>{ingredient.amount}g of {ingredient.name}</li>
                   </div>
                 })
@@ -73,7 +73,7 @@ const GetRecipeDetail = () => {
             <ol>
               {typeOfRecipe === 'db' ? 
                 recipe.steps.map(step => {
-                  return <li key={step.heading} className='step-tag'>
+                  return <li key={step.heading} className='step-tag' style={{margin:'0 0 10px 0'}}>
                     <p><b>{step.heading}</b></p>
                     <p>{step.text}</p>
                   </li>
@@ -87,14 +87,16 @@ const GetRecipeDetail = () => {
           </div>
           {reviews && <div className='detail-container'>
             <h5 className='profile-heading'>Reviews:</h5>
-            {reviews.map(review => {
-              return <Review user={review.user} score={review.score} text={review.text} image={review.image} />
-            })}
+            <div style={{display:'flex', gap:'5px', flexWrap:'wrap'}}>
+              {reviews.map(review => {
+                return <Review user={review.user} score={review.score} text={review.text} image={review.image} />
+              })}
+            </div>
           </div>  
           }
         </div>
       }
-      {!recipe && <p>Recipe not found :{'('}</p>}
+      {!recipe && <p>Searching for your recipe...</p>}
     </div>
   );
 };

@@ -84,7 +84,7 @@ const Profile = () => {
   }, [])
 
   return (
-    <div>
+    <div className='app-container'>
       {isAuthLoaded && 
         <div className='Profile'>
           <div className='user-info-profile'>
@@ -97,8 +97,8 @@ const Profile = () => {
               <div className='my-recipes-profile'>
                 {myRecipes.map(myRecipe => {
                   return <div>
-                    {console.log(myRecipe._id)}
-                    <Recipe name={myRecipe.name} description={myRecipe.description} id={myRecipe._id} ingredients={myRecipe.ingredients} time={myRecipe.time} key={myRecipe.id} mine={true}/>
+                    {console.log(myRecipe.image)}
+                    <Recipe name={myRecipe.name} description={myRecipe.description} id={myRecipe._id} ingredients={myRecipe.ingredients} time={myRecipe.time} key={myRecipe.id} img={myRecipe.image} mine={true}/>
                   </div>
                 })}
               </div>
@@ -114,10 +114,10 @@ const Profile = () => {
                         <Save name={save.name} description={save.description} id={save.id} />
                       </div>
                     }
-                    {/* {save.recipe && <div>
+                    {save.recipe && <div>
                         <Save name={save.recipe.name} description={save.recipe.description} id={save.recipe.id} />
                       </div>
-                    } */}
+                    }
                   </div>
                 })}
               </div>

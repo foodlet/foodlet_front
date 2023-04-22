@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import ProfilePic from '../../ProfilePic/ProfilePic';
 import AuthContext from '../../../contexts/AuthContext';
 import { logout } from '../../../stores/AccessTokenStore';
@@ -7,6 +7,12 @@ import './Navbar.css'
 
 const Navbar = () => {
   const {currentUser} = useContext(AuthContext)
+
+  const location = useLocation()
+
+  if(location.pathname === '/') {
+    return null
+  }
 
   // const handleClick = (e) => {
   //   console.log(e.target.classList)
@@ -21,10 +27,10 @@ const Navbar = () => {
     <div className='Navbar sticky-bottom'>
       {currentUser ? 
         <i className="fa-solid fa-right-from-bracket fa-lg" onClick={() => logout()}></i> :
-        <div>
+        <>
           <Link to='/login'>Login</Link>
           <Link to='/signup'>Signup</Link>
-        </div>
+        </>
       }
       <Link to='/feed'><i className="fa-solid fa-house fa-lg"></i></Link>
       <Link to='/get-recipes'><i className="fa-solid fa-magnifying-glass fa-lg"></i></Link>

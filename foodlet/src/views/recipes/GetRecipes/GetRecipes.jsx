@@ -35,9 +35,9 @@ const GetRecipes = () => {
   })
 
   return (
-    <div>
+    <div className='app-container'>
       <form onSubmit={handleSubmit}>
-        <h3>Get 20 recipes with the ingredient of your choice!</h3>
+        <h3 style={{color:'#25A244'}}>Get 20 recipes with the ingredient of your choice!</h3>
         <FormControl text='Main ingredient' error={touched.mainIngredient && errors.mainIngredient} htmlFor='mainIngredient'>
           <Input 
             id='mainIngredient'
@@ -50,7 +50,7 @@ const GetRecipes = () => {
           />
         </FormControl>
 
-        <button className="btn btn-primary" type="submit" disabled={isSubmitting}>
+        <button className="btn" style={{backgroundColor:'#25A244', color:'white'}} type="submit" disabled={isSubmitting}>
           Submit
         </button>
       </form>

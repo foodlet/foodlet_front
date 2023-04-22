@@ -71,7 +71,8 @@ const CreateRecipe = (props) => {
       } else {
         createRecipe(formData)
           .then(recipe => {
-            navigate('/users/me')
+            console.log('slay')
+            navigate('/profile')
           })
           .catch(err => console.log(err))
       }
@@ -87,8 +88,10 @@ const CreateRecipe = (props) => {
   const addStep = step => setSteps([...steps, step])
 
   return (
-    <div>
+    <div className='app-container'>
       <form onSubmit={handleSubmit} encType='multipart/form-data'>
+        <h2>{edit ? 'Edit recipe' : 'Create recipe'}</h2>
+
         <FormControl text='Name' error={touched.name && errors.name} htmlFor='name'>
           <Input 
             id='name'
